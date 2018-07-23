@@ -30,6 +30,18 @@ Returns a new instance.
 
 Returns an object containing the parsed information.
 
+```
+{
+    userId: 'User ID',
+    initialVisit: 'Initial visit timestamp',
+    source: 'Source',
+    campaign: 'Campaign,
+    medium: 'Medium',
+    keywords: 'Keywords',
+    content: 'Content'
+}
+```
+
 * `setCookie(name = '_ga-legacy-tracking')`
 
 Sets a cookie containing a JSON string with parsed information.
