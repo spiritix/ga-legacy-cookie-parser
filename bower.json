@@ -1,0 +1,17 @@
+{
+    "name": "ga-legacy-cookie-parser-js",
+    "version": "0.0.1",
+    "authors": [
+        "Matthias Isler <mi@matthias-isler.ch>"
+    ],
+    "private": false,
+    "main": "src/ga-legacy-cookie-parser.js",
+    "ignore": [
+        "build",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {}
+}
