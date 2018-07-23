@@ -20,9 +20,36 @@ library, it replicates the tracking functionality of Google Analytics.
 
 # Constructor
 
+* `new GAParser([domains], limitRelevant = true)`
+
+Returns a new instance.
+
 # Methods
 
+* `getInfo()`
+
+Returns an object containing the parsed information.
+
+* `setCookie(name = '_ga-legacy-tracking')`
+
+Sets a cookie containing a JSON string with parsed information.
+
+* `addToForm(formId, inputName = '_ga-legacy-tracking')`
+
+Adds a hidden input to the specified form containing a JSON string with parsed information.
+
 # Usage
+
+```
+<!-- Add before </body> -->
+<script src="../dist/ga-legacy-cookie-parser.min.js"></script>
+<script>
+    var parser = new GAParser(['app.local', 'second.com']);
+    console.log(parser.getInfo()); // Output info to console
+    parser.setCookie(); // Set info to cookie
+    parser.addToForm('test-form'); // Add info to form as hidden input
+</script>
+```
 
 # License
 

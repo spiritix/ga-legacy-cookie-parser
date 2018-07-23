@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-ZZAAAXXX-1', 'auto', {'allowLinker': true});
+        ga('require', 'linker');
+        ga('linker:autoLink', ['second.com'] );
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <a href="https://www.google.com">Google</a>
+    <a href="https://second.com" target="_blank">Other</a>
+    <form id="test-form"></form>
+    <script src="../dist/ga-legacy-cookie-parser.min.js"></script>
+    <script>
+        var parser = new GAParser(['app.local', 'second.com']);
+        console.log(parser.getInfo());
+        parser.setCookie();
+        parser.addToForm('test-form');
+    </script>
+</body>
+</html>
