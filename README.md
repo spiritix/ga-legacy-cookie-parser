@@ -22,6 +22,7 @@ library, it replicates the tracking functionality of Google Analytics.
 * `new GAParser([domains], limitRelevant = true)`
 
 Returns a new instance.
+`domains` must be an array of all domains you want to include in tracking.
 
 # Methods
 
@@ -40,10 +41,10 @@ Adds a hidden input to the specified form containing a JSON string with parsed i
 # Usage
 
 ```
-<!-- Add before </body> -->
+<!-- Add before </body> for all domains you want to include in tracking -->
 <script src="../dist/ga-legacy-cookie-parser.min.js"></script>
 <script>
-    var parser = new GAParser(['app.local', 'second.com']);
+    var parser = new GAParser(['mydomain.com', 'second.com']);
     console.log(parser.getInfo()); // Output info to console
     parser.setCookie(); // Set info to cookie
     parser.addToForm('test-form'); // Add info to form as hidden input
