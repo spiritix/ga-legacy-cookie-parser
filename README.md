@@ -12,8 +12,7 @@ accessing the data.
 - This script is based on the deprecated `ga.js`, it is very likely that some day it will stop working. 
 Nevertheless, it will probably work for some more years since many websites are still actively using old GA versions.
 - While I am not a lawyer myself, I suspect that using this script does violate most of Google's TOC as well as most 
-countries' data protection laws. I would strongly recommend to inform your users about your tracking activities and 
-perform a risk assessment.
+countries' data protection laws. **Use at your own risk.**
 
 If you are looking for a "compliant" solution, have a look at [this](https://github.com/dm-guy/utm-alternative/)
 library, it replicates the tracking functionality of Google Analytics. 
