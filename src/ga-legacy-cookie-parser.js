@@ -1,5 +1,5 @@
 /*!
- * GA Legacy Cookie Parser v0.2.0
+ * GA Legacy Cookie Parser v0.2.1
  *
  * A workaround for accessing GA data in Universal Analytics environments.
  * https://github.com/spiritix/ga-legacy-cookie-parser
@@ -7,6 +7,7 @@
  * Copyright © Matthias Isler <mi@matthias-isler.ch>
  * Licensed under MIT
  */
+/* globals exports, module, define */
 (function (window, undefined) {
     'use strict';
 
@@ -50,7 +51,7 @@
                 name = links[i].href;
             }
 
-            if (onClick != null) {
+            if (onClick !== null) {
                 onClick = String(onClick);
 
                 if (onClick.indexOf('_gasf.push') > -1) {
@@ -59,10 +60,10 @@
             }
 
             for (var j = 0; j < domains.length; j++) {
-                if (name != hostname && name.indexOf(domains[j]) != -1 && name.indexOf('mailto:') == -1) {
+                if (name !== hostname && name.indexOf(domains[j]) !== -1 && name.indexOf('mailto:') == -1) {
 
                     links[i].setAttribute('onclick',
-                        '' + ((onClick != null) ? onClick + '; ' : '') +
+                        '' + ((onClick !== null) ? onClick + '; ' : '') +
                         "_gaq.push(['xxga._link', '" + links[i].href + "']); return false;"
                     );
                 }
@@ -100,7 +101,7 @@
                 info.domainHash = content[0];
                 info.pageViews = content[1] && Number(content[1]);
                 info.outboundClick = content[2] && Number(content[2]);
-                info.currentVisit = content[3] && Number(content[3])
+                info.currentVisit = content[3] && Number(content[3]);
             }
             else if (type === 'utmc') {
                 info.domainHash = content[0];
@@ -119,9 +120,9 @@
                         param = param.split('=');
 
                         try {
-                            info[param[0]] = global.unescape(/^\(.*\)$/.test(param[1]) ?
-                                param[1].replace(/^\(?(.*?)\)?$/, '$1') :
-                                param[1]);
+                            info[param[0]] = decodeURI(
+                                /^\(.*\)$/.test(param[1]) ? param[1].replace(/^\(?(.*?)\)?$/, '$1') : param[1]
+                            );
                         }
                         catch (e) {
                             info[param[0]] = param[1];
