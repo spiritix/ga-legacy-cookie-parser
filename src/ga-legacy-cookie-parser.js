@@ -1,5 +1,5 @@
 /*!
- * GA Legacy Cookie Parser v0.1.0
+ * GA Legacy Cookie Parser v0.1.1
  *
  * A workaround for accessing GA data in Universal Analytics environments.
  * https://github.com/spiritix/ga-legacy-cookie-parser
@@ -63,7 +63,7 @@
 
                     links[i].setAttribute('onclick',
                         '' + ((onClick != null) ? onClick + '; ' : '') +
-                        "_gaq.push(['sfga._link', '" + links[i].href + "']); return false;"
+                        "_gaq.push(['xxga._link', '" + links[i].href + "']); return false;"
                     );
                 }
             }
