@@ -1,5 +1,5 @@
 /*!
- * GA Legacy Cookie Parser v0.1.1
+ * GA Legacy Cookie Parser v0.2.0
  *
  * A workaround for accessing GA data in Universal Analytics environments.
  * https://github.com/spiritix/ga-legacy-cookie-parser
@@ -134,54 +134,80 @@
         return cookies;
     }
 
-    var GAParser = function (domains, limitRelevant) {
+    function getInfo(limitRelevant) {
+        var info = parseCookies();
+
+        if (limitRelevant) {
+            info = {
+                userId: info.utma.userId,
+                initialVisit: info.utma.initialVisit,
+                source: info.utmz.utmcsr,
+                campaign: info.utmz.utmccn,
+                medium: info.utmz.utmcmd,
+                keywords: info.utmz.utmctr,
+                content: info.utmz.utmcct
+            };
+        }
+
+        return info;
+    }
+
+    function setCookie(name, overrideExisting, data) {
+        if (overrideExisting === false && document.cookie.indexOf(name + '=') >= 0) {
+            return;
+        }
+
+        var expiryDate = new Date();
+        expiryDate.setFullYear(new Date().getFullYear() + 10);
+
+        var cookie = [
+            name,
+            '=',
+            JSON.stringify(data),
+            '; domain=.', getHostname(),
+            '; expires=' + expiryDate.toGMTString(),
+            '; path=/;'
+        ].join('');
+
+        document.cookie = cookie;
+    }
+
+    function addToForm(formId, inputName, data) {
+        var element1 = document.createElement('input');
+
+        element1.type = 'hidden';
+        element1.value = JSON.stringify(data);
+        element1.name = inputName;
+
+        document.getElementById(formId).appendChild(element1);
+    }
+
+    var GAParser = function(domains, limitRelevant) {
         limitRelevant = limitRelevant || true;
 
         var hostname = getHostname();
         setupAnalytics(hostname);
         trackLinks(hostname, domains);
 
-        this.getInfo = function () {
-            var info = parseCookies();
-
-            if (limitRelevant) {
-                info = {
-                    userId: info.utma.userId,
-                    initialVisit: info.utma.initialVisit,
-                    source: info.utmz.utmcsr,
-                    campaign: info.utmz.utmccn,
-                    medium: info.utmz.utmcmd,
-                    keywords: info.utmz.utmctr,
-                    content: info.utmz.utmcct
-                };
-            }
-
-            return info;
+        this.getInfo = function() {
+            return getInfo(limitRelevant);
         };
 
-        this.setCookie = function (name) {
+        this.setCookie = function(name, overrideExisting) {
             name = name || '_ga-legacy-tracking';
+            overrideExisting = overrideExisting !== false;
 
-            var cookie = [
-                name,
-                '=',
-                JSON.stringify(this.getInfo()),
-                '; domain=.', window.location.host.toString(),
-                '; path=/;'
-            ].join('');
-
-            document.cookie = cookie;
+            window._gaq.push(function() {
+                setCookie(name, overrideExisting, getInfo(limitRelevant));
+            });
         };
 
-        this.addToForm = function (formId, inputName) {
+        this.addToForm = function(formId, inputName) {
             inputName = inputName || '_ga-legacy-tracking';
 
-            var element1 = document.createElement('input');
-            element1.type = 'hidden';
-            element1.value = JSON.stringify(this.getInfo());
-            element1.name = inputName;
-
-            document.getElementById(formId).appendChild(element1);
+            window._gaq.push(function() {
+                addToForm(formId, inputName, getInfo(limitRelevant));
+            });
         };
 
         return this;

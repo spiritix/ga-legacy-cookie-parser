@@ -42,7 +42,7 @@ Returns an object containing the parsed information.
 }
 ```
 
-* `setCookie(name = '_ga-legacy-tracking')`
+* `setCookie(name = '_ga-legacy-tracking', overrideExisting = true)`
 
 Sets a cookie containing a JSON string with parsed information.
 
@@ -54,7 +54,7 @@ Adds a hidden input to the specified form containing a JSON string with parsed i
 
 ```
 <!-- Add before </body> for all domains you want to include in tracking -->
-<script src="https://cdn.jsdelivr.net/gh/spiritix/ga-legacy-cookie-parser@0.1.1/dist/ga-legacy-cookie-parser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/spiritix/ga-legacy-cookie-parser@0.2.0/dist/ga-legacy-cookie-parser.min.js"></script>
 <script>
     var parser = new GAParser(['mydomain.com', 'second.com']);
     console.log(parser.getInfo()); // Output info to console
