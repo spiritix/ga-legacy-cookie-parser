@@ -63,6 +63,10 @@ Adds a hidden input to the specified form containing a JSON string with parsed i
 </script>
 ```
 
+## Usage with Google Ads (AdWords)
+
+Since Google Ads nowadays uses a URL parameter called ``gclid`` which can't be parsed on runtime by ``analytics.js``, you'll need to [setup manual tagging](https://docs.heapanalytics.com/docs/manual-and-autotagging-for-adwords) if you like your Google Ads data to be included in the information provided by this library.
+
 # License
 
 GA Legacy Cookie Parser is free software distributed under the terms of the MIT license.
