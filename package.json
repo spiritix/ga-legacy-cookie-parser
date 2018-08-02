@@ -1,7 +1,7 @@
 {
     "title": "GA Legacy Cookie Parser",
     "name": "ga-legacy-cookie-parser-js",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "author": "Matthias Isler <mi@matthias-isler.ch>",
     "description": "A workaround for accessing GA data in Universal Analytics environments.",
     "keywords": [

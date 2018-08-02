@@ -1,5 +1,5 @@
 /*!
- * GA Legacy Cookie Parser v0.2.1
+ * GA Legacy Cookie Parser v0.3.0
  *
  * A workaround for accessing GA data in Universal Analytics environments.
  * https://github.com/spiritix/ga-legacy-cookie-parser
@@ -18,10 +18,10 @@
         return hostname.toLowerCase();
     }
 
-    function setupAnalytics(hostname) {
+    function setupAnalytics(trackingId, hostname) {
         window._gaq = window._gaq || [];
 
-        window._gaq.push(['xxga._setAccount', 'UA-XXXYYYZZZ-1']);
+        window._gaq.push(['xxga._setAccount', trackingId]);
         window._gaq.push(['xxga._setDomainName', hostname]);
         window._gaq.push(['xxga._setAllowLinker', true]);
         window._gaq.push(['xxga._trackPageview']);
@@ -183,11 +183,13 @@
         document.getElementById(formId).appendChild(element1);
     }
 
-    var GAParser = function(domains, limitRelevant) {
+    var GAParser = function(domains, trackingId, limitRelevant) {
+        trackingId = trackingId || 'UA-XXXYYYZZZ-1';
         limitRelevant = limitRelevant || true;
 
         var hostname = getHostname();
-        setupAnalytics(hostname);
+
+        setupAnalytics(trackingId, hostname);
         trackLinks(hostname, domains);
 
         this.getInfo = function() {
