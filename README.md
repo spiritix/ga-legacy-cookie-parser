@@ -22,7 +22,8 @@ library, it replicates the tracking functionality of Google Analytics.
 * `new GAParser([domains], trackingId = 'UA-XXXYYYZZZ-1', limitRelevant = true)`
 
 Returns a new instance.
-`domains` must be an array of all domains you want to include in tracking.
+- `domains` must be an array of all domains you want to include in tracking.
+- `trackingId` can be used to link the legacy tracking with an actual GA property, but isn't required at all. Make sure to not use the same property for Universal Analytics and legacy tracking, as this will corrupt the collected data.
 
 # Methods
 
