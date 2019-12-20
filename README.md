@@ -1,7 +1,7 @@
 # GA Legacy Cookie Parser
 
 Once upon a time, people used to parse Google Analytics cookies to retrieve and store user and campaign data in their 
-database. Unfortunately, with Universal Analytics (UA), it was not possible to retrieve the GA cookie values anymore, 
+database. Unfortunately, with Universal Analytics (UA), it's not possible to retrieve the GA cookie values anymore, 
 since Universal Analytics script does not store relevant data on a cookie but processes it on server side.
 
 This script provides a replacement for environments using Universal Analytics. It includes the old `ga.js`, makes sure 
@@ -11,7 +11,7 @@ accessing the data.
 **Attention:**
 - This script is based on the deprecated `ga.js`, it is very likely that some day it will stop working. 
 Nevertheless, it will probably work for some more years since many websites are still actively using old GA versions.
-- This script very likely violates Google's TOC. **Use at your own risk.**
+- This script possibly violates Google's TOC. **Use at your own risk.**
 
 If you are looking for a "compliant" solution, have a look at [this](https://github.com/dm-guy/utm-alternative/)
 library, it replicates the tracking functionality of Google Analytics. 
