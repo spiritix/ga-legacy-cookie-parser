@@ -13,9 +13,9 @@
 
     function getHostname() {
         var hostname = document.location.hostname;
-        hostname = hostname.match(/(([^.\/]+\.[^.\/]{2,3}\.[^.\/]{2})|(([^.\/]+\.)[^.\/]{2,5}))(\/.*)?$/)[1];
+        hostname = hostname.match(/(([^.\/]+\.[^.\/]{2,3}\.[^.\/]{2})|(([^.\/]+\.)[^.\/]{2,5}))(\/.*)?$/);
 
-        return hostname.toLowerCase();
+        return hostname ? hostname[1].toLowerCase() : '';
     }
 
     function setupAnalytics(trackingId, hostname) {
@@ -189,14 +189,20 @@
 
         var hostname = getHostname();
 
-        setupAnalytics(trackingId, hostname);
-        trackLinks(hostname, domains);
+        if (hostname) {
+            setupAnalytics(trackingId, hostname);
+            trackLinks(hostname, domains);
+        }
 
         this.getInfo = function() {
             return getInfo(limitRelevant);
         };
 
         this.setCookie = function(name, overrideExisting) {
+            if (!hostname) {
+                return;
+            }
+
             name = name || '_ga-legacy-tracking';
             overrideExisting = overrideExisting !== false;
 
@@ -206,6 +212,10 @@
         };
 
         this.addToForm = function(formId, inputName) {
+            if (!hostname) {
+                return;
+            }
+
             inputName = inputName || '_ga-legacy-tracking';
 
             window._gaq.push(function() {
