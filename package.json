@@ -34,5 +34,8 @@
         "test": "test"
     },
     "bugs": "https://github.com/spiritix/ga-legacy-cookie-parser/issues",
-    "download": "https://raw.github.com/spiritix/ga-legacy-cookie-parser/master/dist/ga-legacy-cookie-parser.min.js"
+    "download": "https://raw.github.com/spiritix/ga-legacy-cookie-parser/master/dist/ga-legacy-cookie-parser.min.js",
+    "dependencies": {
+        "url-search-params-polyfill": "^8.1.0"
+    }
 }

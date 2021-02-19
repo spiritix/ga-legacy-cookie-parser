@@ -135,10 +135,23 @@
         return cookies;
     }
 
+    function parseUrlParams() {
+        var query = new URLSearchParams(window.location.search),
+            params = { gclid: '' };
+
+        for (key of query.keys()) {
+            params[key.toLowerCase()] = query.get(key);
+        }
+
+        return params;
+    }
+
     function getInfo(limitRelevant) {
         var info = parseCookies();
 
         if (limitRelevant) {
+            var queryParams = parseUrlParams();
+
             info = {
                 userId: info.utma.userId,
                 initialVisit: info.utma.initialVisit,
@@ -146,7 +159,8 @@
                 campaign: info.utmz.utmccn,
                 medium: info.utmz.utmcmd,
                 keywords: info.utmz.utmctr,
-                content: info.utmz.utmcct
+                content: info.utmz.utmcct,
+                gclid: queryParams.gclid
             };
         }
 
